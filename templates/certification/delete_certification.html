@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %} {% block title %} Delete Certification {%
+endblock %}
+<!--  -->
+{% block content %}
+
+<div class="container mt-5">
+	<h2>Delete Certification</h2>
+	<p>
+		Are you sure you want to delete the certification:
+		<strong>{{ certification.name }}</strong>?
+	</p>
+	<form method="POST">
+		{% csrf_token %}
+		<button type="submit" class="btn btn-danger">Delete</button>
+		<a
+			href="{% url 'user_profile' certification.profile.user.id %}"
+			class="btn btn-secondary"
+			>Cancel</a
+		>
+	</form>
+</div>
+
+{% endblock %}

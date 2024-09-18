@@ -1,0 +1,43 @@
+{% extends 'base/base.html' %} {% block content %}
+<div class="container mt-4">
+	<h2>Add Project</h2>
+	<form method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		<div class="mb-3">
+			<label for="title" class="form-label">Title</label>
+			<input
+				type="text"
+				class="form-control"
+				id="title"
+				name="title"
+				required
+			/>
+		</div>
+		<div class="mb-3">
+			<label for="description" class="form-label">Description</label>
+			<textarea
+				class="form-control"
+				id="description"
+				name="description"
+				rows="3"
+				required
+			></textarea>
+		</div>
+		<div class="mb-3">
+			<label for="image" class="form-label">Image</label>
+			<input
+				type="file"
+				class="form-control"
+				id="image"
+				name="image"
+				required
+			/>
+		</div>
+		<div class="mb-3">
+			<label for="link" class="form-label">Link</label>
+			<input type="url" class="form-control" id="link" name="link" required />
+		</div>
+		<button type="submit" class="btn btn-primary">Add Project</button>
+	</form>
+</div>
+{% endblock %}

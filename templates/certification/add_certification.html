@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %} {% block title %}Add Certification{% endblock %}
+<!--  -->
+{% block content %}
+<div class="container mt-5">
+	<h2>Add Certification</h2>
+	<form method="POST">
+		{% csrf_token %}
+		<div class="mb-3">
+			<label for="name" class="form-label">Certification Name</label>
+			<input type="text" class="form-control" id="name" name="name" required />
+		</div>
+		<div class="mb-3">
+			<label for="organization" class="form-label">Issuing Organization</label>
+			<input
+				type="text"
+				class="form-control"
+				id="organization"
+				name="organization"
+				required
+			/>
+		</div>
+		<div class="mb-3">
+			<label for="date_obtained" class="form-label">Date Issued</label>
+			<input
+				type="month"
+				class="form-control"
+				id="date_obtained"
+				name="date_obtained"
+				required
+			/>
+		</div>
+		<button type="submit" class="btn btn-primary">Save</button>
+	</form>
+</div>
+{% endblock %}

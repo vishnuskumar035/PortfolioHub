@@ -1,0 +1,134 @@
+{% extends 'base/base.html' %} {% block title %} Edit Profile {% endblock %}
+<!--  -->
+{% block content %}
+<div class="container mt-5">
+	<h2>Edit Profile</h2>
+	<form method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		<div class="mb-3">
+			<label for="first_name" class="form-label">First Name</label>
+			<input
+				type="text"
+				class="form-control"
+				id="first_name"
+				name="first_name"
+				value="{{ user.first_name }}"
+			/>
+		</div>
+		<div class="mb-3">
+			<label for="last_name" class="form-label">Last Name</label>
+			<input
+				type="text"
+				class="form-control"
+				id="last_name"
+				name="last_name"
+				value="{{ user.last_name }}"
+			/>
+		</div>
+		<div class="mb-3">
+			<label for="bio" class="form-label">Bio</label>
+			<textarea class="form-control" id="bio" name="bio">
+{{ user_profile.bio }}</textarea
+			>
+		</div>
+		<div class="mb-3">
+			<label for="phone" class="form-label">Phone Number</label>
+			<input
+				type="text"
+				class="form-control"
+				id="phone"
+				name="phone"
+				value="{{ user_profile.phone }}"
+			/>
+		</div>
+		<div class="mb-3">
+			<label for="email" class="form-label">Email</label>
+			<input
+				type="email"
+				class="form-control"
+				id="email"
+				name="email"
+				value="{{ user_profile.email }}"
+			/>
+		</div>
+		<div class="mb-3">
+			<label for="linkedin_id" class="form-label">LinkedIn</label>
+			<input
+				type="url"
+				class="form-control"
+				id="linkedin_id"
+				name="linkedin_id"
+				value="{{ user_profile.linkedin_id }}"
+			/>
+		</div>
+		<div class="mb-3">
+			<label for="github_id" class="form-label">GitHub</label>
+			<input
+				type="url"
+				class="form-control"
+				id="github_id"
+				name="github_id"
+				value="{{ user_profile.github_id }}"
+			/>
+		</div>
+		<div class="mb-3">
+			<label for="image" class="form-label">Profile Image</label>
+			<input type="file" class="form-control" id="image" name="image" />
+		</div>
+		<div class="mb-3">
+			<label for="resume" class="form-label">Resume</label>
+			<input
+				type="file"
+				class="form-control"
+				id="resume"
+				name="resume"
+				accept=".pdf,.doc,.docx"
+			/>
+			<!-- Optionally show a link to the current resume if available -->
+			{% if user_profile.resume %}
+			<p>
+				Current Resume:
+				<a href="{{ user_profile.resume.url }}" target="_blank">Download</a>
+			</p>
+			{% endif %}
+		</div>
+		<div class="mb-3">
+			<label for="job_role_1" class="form-label">Job Role 1</label>
+			<input
+				type="text"
+				placeholder="Enter Aspiring Job Role 1"
+				class="form-control"
+				id="job_role_1"
+				name="job_role_1"
+				value="{{ user_profile.job_role_1 }}"
+			/>
+		</div>
+
+		<div class="mb-3">
+			<label for="job_role_2" class="form-label">Job Role 2</label>
+			<input
+				type="text"
+				placeholder="Enter Aspiring Job Role 2"
+				class="form-control"
+				id="job_role_2"
+				name="job_role_2"
+				value="{{ user_profile.job_role_2 }}"
+			/>
+		</div>
+
+		<div class="mb-3">
+			<label for="job_role_3" class="form-label">Job Role 3</label>
+			<input
+				type="text"
+				placeholder="Enter Aspiring Job Role 3"
+				class="form-control"
+				id="job_role_3"
+				name="job_role_3"
+				value="{{ user_profile.job_role_3 }}"
+			/>
+		</div>
+		<button type="submit" class="btn btn-primary">Save Changes</button>
+	</form>
+</div>
+
+{% endblock %}

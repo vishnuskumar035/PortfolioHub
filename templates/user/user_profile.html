@@ -1,0 +1,540 @@
+{% extends 'base/base.html' %}
+<!--  -->
+{% block title %}Profile of {{ profile.user.username }} {% endblock %}
+<!--  -->
+{% block content %}
+<div class="container mt-4">
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+		<li class="nav-item" role="presentation">
+			<a
+				class="nav-link active"
+				id="home-tab"
+				data-bs-toggle="tab"
+				href="#home"
+				role="tab"
+				aria-controls="home"
+				aria-selected="false"
+				>Home</a
+			>
+		</li>
+		<li class="nav-item" role="presentation">
+			<a
+				class="nav-link"
+				id="about-tab"
+				data-bs-toggle="tab"
+				href="#about"
+				role="tab"
+				aria-controls="about"
+				aria-selected="false"
+				>About</a
+			>
+		</li>
+		<li class="nav-item" role="presentation">
+			<a
+				class="nav-link"
+				id="projects-tab"
+				data-bs-toggle="tab"
+				href="#projects"
+				role="tab"
+				aria-controls="projects"
+				aria-selected="true"
+				>Portfolio</a
+			>
+		</li>
+		<li class="nav-item" role="presentation">
+			<a
+				class="nav-link"
+				id="workexperience-tab"
+				data-bs-toggle="tab"
+				href="#workexperience"
+				role="tab"
+				aria-controls="workexperience"
+				aria-selected="false"
+				>Work Experience</a
+			>
+		</li>
+		<li class="nav-item" role="presentation">
+			<a
+				class="nav-link"
+				id="education-tab"
+				data-bs-toggle="tab"
+				href="#education"
+				role="tab"
+				aria-controls="education"
+				aria-selected="false"
+				>Education</a
+			>
+		</li>
+		<li class="nav-item" role="presentation">
+			<a
+				class="nav-link"
+				id="certification-tab"
+				data-bs-toggle="tab"
+				href="#certification"
+				role="tab"
+				aria-controls="certification"
+				aria-selected="false"
+				>Certifications</a
+			>
+		</li>
+		<li class="nav-item" role="presentation">
+			<a
+				class="nav-link"
+				id="skills-tab"
+				data-bs-toggle="tab"
+				href="#skills"
+				role="tab"
+				aria-controls="skills"
+				aria-selected="false"
+				>Skills</a
+			>
+		</li>
+		<li class="nav-item" role="presentation">
+			<a
+				class="nav-link"
+				id="contact-tab"
+				data-bs-toggle="tab"
+				href="#contact"
+				role="tab"
+				aria-controls="contact"
+				aria-selected="false"
+				>Contact</a
+			>
+		</li>
+		<li class="nav-item" role="presentation">
+			<a
+				class="nav-link"
+				id="resume-tab"
+				href="{% url 'download_resume' profile.user.id %}"
+				>Resume</a
+			>
+		</li>
+	</ul>
+	<div class="tab-content mt-3" id="myTabContent">
+		<div
+			class="tab-pane fade show active"
+			id="home"
+			role="tabpanel"
+			aria-labelledby="home-tab"
+		>
+			<div class="container mt-4">
+				<div class="row">
+					<div
+						class="home-bg"
+						style="background-image: url('{{ profile.image.url }}'); height: 100vh;background-size: cover; background-position: center; background-repeat: no-repeat;"
+					>
+						<div
+							class="container h-100 d-flex align-items-center justify-content-start"
+						>
+							<div class="text-white" style="padding-left: 50px">
+								<h1 class="display-3">
+									{{ profile.user.first_name }} {{ profile.user.last_name }}
+								</h1>
+								<p class="fs-4">
+									I'm <span class="typed"></span
+									><span
+										class="typed-cursor typed-cursor--blink"
+										aria-hidden="true"
+									></span>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div
+			class="tab-pane fade show"
+			id="about"
+			role="tabpanel"
+			aria-labelledby="about-tab"
+		>
+			<div class="container mt-4">
+				<div class="row">
+					<div class="col-md-4">
+						<img
+							src="{{ profile.image.url }}"
+							class="img-fluid rounded"
+							alt="Profile Image"
+						/>
+					</div>
+					<!-- Right Side: Details -->
+					<div class="col-md-8">
+						<h2>About</h2>
+
+						<div class="profile-info">
+							<h3>{{ profile.job_role_1 }}</h3>
+							<p>{{ profile.bio }}</p>
+							<ul class="details-list">
+								<li>
+									<i class="bi bi-calendar-event"></i><strong> Name: </strong>
+									{{ profile.user.first_name }} {{ profile.user.last_name }}
+								</li>
+								<li>
+									<i class="bi bi-envelope"></i><strong> Email: </strong>
+									{{ profile.user.email }}
+								</li>
+								<li>
+									<i class="bi bi-phone"></i><strong> Phone: </strong>
+									{{ profile.phone }}
+								</li>
+
+								<li>
+									<i class="bi bi-globe"></i><strong>LinkedIn:</strong>
+									<a href="{{ profile.linkedin_id }}" target="_blank"
+										>{{ profile.linkedin_id }}</a
+									>
+								</li>
+								<li>
+									<i class="bi bi-globe"></i><strong>Github:</strong>
+									<a href="{{ profile.github_id }}" target="_blank"
+										>{{ profile.github_id }}</a
+									>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div
+			class="tab-pane fade show"
+			id="projects"
+			role="tabpanel"
+			aria-labelledby="projects-tab"
+		>
+			{% if request.user == profile.user %}
+			<a href="{% url 'add_project' %}" class="btn btn-primary">Add Project</a>
+			{% endif %}
+			<div class="container mt-4">
+				<div class="row">
+					{% for project in projects %}
+					<div class="col-md-4">
+						<div
+							class="card mb-3 mt-4"
+							style="background-color: #71e3f2; height: 35rem"
+						>
+							<img
+								src="{{ project.image.url }}"
+								class="card-img-top"
+								alt="{{ profile.user.username }}"
+							/>
+							<div class="card-body">
+								<h5 class="card-title">{{ project.title }}</h5>
+								<hr />
+								<p class="card-text">{{ project.description }}</p>
+							</div>
+							<div class="card-footer">
+								{% if project.link %}
+								<a href="{{ project.link }}" class="btn btn-primary"
+									>View Project</a
+								>
+								{% endif %} {% if request.user == profile.user %}
+								<a
+									href="{% url 'edit_project' project.id %}"
+									class="btn btn-warning"
+									>Edit</a
+								>
+								<a
+									href="{% url 'delete_project' project.id %}"
+									class="btn btn-danger"
+									>Delete</a
+								>
+								<!-- <form
+									action="{% url 'delete_project' project.id %}"
+									method="POST"
+									style="display: inline"
+								>
+									{% csrf_token %}
+									<button type="submit" class="btn btn-danger">Delete</button>
+								</form> -->
+								{% endif %}
+							</div>
+						</div>
+					</div>
+
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		<div
+			class="tab-pane fade"
+			id="workexperience"
+			role="tabpanel"
+			aria-labelledby="workexperience-tab"
+		>
+			{% if request.user == profile.user %}
+			<a
+				href="{% url 'add_work_experience' %}"
+				role="button"
+				class="btn btn-primary"
+				>Add Work Experience</a
+			>
+			{% endif %}
+			<div class="container mt-5">
+				<div class="row">
+					{% for work in work_experiences %}
+
+					<div class="col-md-4 mb-4">
+						<div
+							class="card shadow-sm border-0"
+							style="
+								background-color: #71e3f2;
+								height: 32rem;
+								border-radius: 20px;
+							"
+						>
+							<div class="card-body">
+								<!-- Job title -->
+								<h4 class="card-title fw-bold">{{ work.position }}</h4>
+
+								<!-- Company name, linking to a company website if available -->
+								<h5 class="card-subtitle text-danger">{{ work.company }}</h5>
+								<hr />
+
+								<div class="mt-2">
+									<!-- Date Icon and Date Range -->
+									<i class="bi bi-calendar-event fw-bold me-2"></i>
+									<span class="fw-bold">
+										{{ work.formatted_start_date }} -
+										{{work.formatted_end_date}}
+									</span>
+								</div>
+								<hr />
+
+								<!-- Job description -->
+								<p class="mt-3">{{ work.description }}</p>
+							</div>
+							{% if user.is_authenticated %}
+							<div class="card-footer">
+								{% if request.user == profile.user %}
+								<a
+									href="{% url 'edit_work_experience' work.id %}"
+									class="btn btn-warning"
+									>Edit</a
+								>
+								<a
+									href="{% url 'delete_work_experience' work.id %}"
+									class="btn btn-danger"
+									>Delete</a
+								>
+
+								{% endif %}
+							</div>
+							{% endif %}
+						</div>
+					</div>
+
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		<div
+			class="tab-pane fade"
+			id="education"
+			role="tabpanel"
+			aria-labelledby="education-tab"
+		>
+			{% if request.user == profile.user %}
+			<a href="{% url 'add_education' %}" class="btn btn-primary"
+				>Add Education</a
+			>
+			{% endif %}
+			<div class="container mt-5">
+				<div class="row">
+					{% for edu in educations %}
+
+					<div class="col-md-4 mb-4">
+						<div
+							class="card shadow-sm border-0"
+							style="background-color: #71e3f2; border-radius: 20px"
+						>
+							<div class="card-body">
+								<!-- Job title -->
+								<h4 class="card-title fw-bold">{{ edu.degree }}</h4>
+
+								<!-- Company name, linking to a company website if available -->
+								<h5 class="card-subtitle text-danger">{{ edu.institution }}</h5>
+
+								<div class="mt-2">
+									<!-- Date Icon and Date Range -->
+									<i class="bi bi-calendar-event fw-bold me-2"></i>
+									<span class="fw-bold">
+										{{ edu.formatted_start_date }} - {{edu.formatted_end_date}}
+									</span>
+								</div>
+							</div>
+							{% if user.is_authenticated %}
+							<div class="card-footer">
+								{% if request.user == profile.user %}
+								<a
+									href="{% url 'edit_education' edu.id %}"
+									class="btn btn-warning"
+									>Edit</a
+								>
+								<a
+									href="{% url 'delete_education' edu.id %}"
+									class="btn btn-danger"
+									>Delete</a
+								>
+
+								{% endif %}
+							</div>
+							{% endif %}
+						</div>
+					</div>
+
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		<div
+			class="tab-pane fade"
+			id="certification"
+			role="tabpanel"
+			aria-labelledby="certification-tab"
+		>
+			{% if request.user == profile.user %}
+			<a href="{% url 'add_certification' %}" class="btn btn-primary"
+				>Add Certification</a
+			>
+			{% endif %}
+			<div class="container mt-5">
+				<div class="row">
+					{% for cert in certifications %}
+
+					<div class="col-md-4 mb-4">
+						<div
+							class="card shadow-sm border-0"
+							style="background-color: #71e3f2; border-radius: 20px"
+						>
+							<div class="card-body">
+								<!-- Job title -->
+								<h4 class="card-title fw-bold">{{ cert.name }}</h4>
+
+								<!-- Company name, linking to a company website if available -->
+								<h5 class="card-subtitle text-danger">
+									{{ cert.organization }}
+								</h5>
+
+								<div class="mt-2">
+									<!-- Date Icon and Date Range -->
+									<i class="bi bi-calendar-event fw-bold me-2"></i>
+									<span class="fw-bold">
+										{{ cert.formatted_date_obtained }}
+									</span>
+								</div>
+							</div>
+							{% if user.is_authenticated %}
+							<div class="card-footer">
+								{% if request.user == profile.user %}
+								<a
+									href="{% url 'edit_certification' cert.id %}"
+									class="btn btn-warning"
+									>Edit</a
+								>
+								<a
+									href="{% url 'delete_certification' cert.id %}"
+									class="btn btn-danger"
+									>Delete</a
+								>
+
+								{% endif %}
+							</div>
+							{% endif %}
+						</div>
+					</div>
+
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane fade" id="skills" role="tabpanel">
+			{% if request.user == profile.user %}
+			<a href="{% url 'add_skill' %}" class="btn btn-primary">Add Skill</a>
+			{% endif %}
+			<div class="container mt-5">
+				<h2>Skills</h2>
+				<div class="row">
+					{% for skill in skills %}
+					<div class="col-md-4 mb-4">
+						<div
+							class="card"
+							style="background-color: #71e3f2; border-radius: 20px"
+						>
+							<div class="card-body">
+								<span class="card-title fw-bold fs-5"
+									>{{ skill.skill_name }}</span
+								>
+								<span class="float-end fs-5 fw-bold"
+									>{{ skill.proficiency }}%</span
+								>
+								<div class="progress-bar-wrapper mt-3">
+									<div class="progress-bar">
+										<div
+											class="progress-fill"
+											style="width: {{ skill.proficiency }}%;"
+										></div>
+									</div>
+								</div>
+							</div>
+							{% if user.is_authenticated %}
+							<div class="card-footer">
+								{% if request.user == profile.user %}
+								<a
+									href="{% url 'edit_skill' skill.id %}"
+									class="btn btn-warning"
+									>Edit</a
+								>
+								<a
+									href="{% url 'delete_skill' skill.id %}"
+									class="btn btn-danger"
+									>Delete</a
+								>
+								<!-- <form
+									action="{% url 'delete_skill' skill.id %}"
+									method="POST"
+									style="display: inline"
+								>
+									{% csrf_token %}
+									<button type="submit" class="btn btn-danger">Delete</button>
+								</form> -->
+								{% endif %}
+							</div>
+							{% endif %}
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane fade" id="contact" role="tabpanel">
+			{% if request.user == profile.user %}
+			<a href="{% url 'edit_profile' %}" class="btn btn-primary"
+				>Edit Contact Information</a
+			>
+			{% endif %}
+			<div class="container mt-5">
+				<h2>Contact Information</h2>
+				<p><strong>Email:</strong> {{ profile.email }}</p>
+				<p><strong>Phone:</strong> {{ profile.phone }}</p>
+
+				<p>
+					<strong>LinkedIn:</strong>
+					<a href="{{ profile.linkedin_id }}" target="_blank"
+						>{{ profile.linkedin_id }}</a
+					>
+				</p>
+				<p>
+					<strong>GitHub:</strong>
+					<a href="{{ profile.github_id }}" target="_blank"
+						>{{ profile.github_id }}</a
+					>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

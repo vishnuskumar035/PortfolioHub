@@ -1,0 +1,38 @@
+{% extends 'base/base.html' %} {% block title %} Add Skill {% endblock %}
+<!--  -->
+{% block content %}
+<div class="container mt-5">
+	<h2>Edit Skill</h2>
+	<form method="POST">
+		{% csrf_token %}
+		<div class="mb-3">
+			<label for="skill_name" class="form-label">Skill Name</label>
+			<input
+				type="text"
+				class="form-control"
+				id="skill_name"
+				name="skill_name"
+				value="{{ skill.skill_name }}"
+				required
+			/>
+		</div>
+		<div class="mb-3">
+			<label for="proficiency" class="form-label"
+				>Proficiency (Percentage)</label
+			>
+			<input
+				type="number"
+				class="form-control"
+				id="proficiency"
+				name="proficiency"
+				value="{{ skill.proficiency }}"
+				min="0"
+				max="100"
+				required
+			/>
+		</div>
+		<button type="submit" class="btn btn-primary">Save Changes</button>
+	</form>
+</div>
+
+{% endblock %}

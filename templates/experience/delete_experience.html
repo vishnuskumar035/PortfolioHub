@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %} {% block title %} Delete Experience {% endblock
+%}
+<!--  -->
+{% block content %}
+
+<div class="container mt-5">
+	<h2>Delete Work Experience</h2>
+	<p>
+		Are you sure you want to delete the experience:
+		<strong>{{ experience.position }}</strong>?
+	</p>
+	<form method="POST">
+		{% csrf_token %}
+		<button type="submit" class="btn btn-danger">Delete</button>
+		<a
+			href="{% url 'user_profile' experience.profile.user.id %}"
+			class="btn btn-secondary"
+			>Cancel</a
+		>
+	</form>
+</div>
+
+{% endblock %}

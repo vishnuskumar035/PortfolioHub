@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %} {% block title %} Delete Education {% endblock %}
+<!--  -->
+{% block content %}
+
+<div class="container mt-5">
+	<h2>Delete Education</h2>
+	<p>
+		Are you sure you want to delete the education:
+		<strong>{{ education.degree }}</strong>?
+	</p>
+	<form method="POST">
+		{% csrf_token %}
+		<button type="submit" class="btn btn-danger">Delete</button>
+		<a
+			href="{% url 'user_profile' education.profile.user.id %}"
+			class="btn btn-secondary"
+			>Cancel</a
+		>
+	</form>
+</div>
+
+{% endblock %}

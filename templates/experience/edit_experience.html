@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %} {% block title %} Edit Work Experience {%
+endblock %}
+<!--  -->
+{% block content %}
+<div class="container mt-5">
+	<h2>Edit Work Experience</h2>
+	<form method="POST">
+		{% csrf_token %}
+		<div class="mb-3">
+			<label for="position" class="form-label">Position</label>
+			<input
+				type="text"
+				class="form-control"
+				id="position"
+				name="position"
+				value="{{ work_experience.position }}"
+			/>
+		</div>
+		<div class="mb-3">
+			<label for="company" class="form-label">Company</label>
+			<input
+				type="text"
+				class="form-control"
+				id="company"
+				name="company"
+				value="{{ work_experience.company }}"
+			/>
+		</div>
+
+		<div class="mb-3">
+			<label for="start_date" class="form-label">Start Date (MM/YYYY)</label>
+			<input
+				type="month"
+				class="form-control"
+				id="start_date"
+				name="start_date"
+				value="{{ work_experience.start_date }}"
+			/>
+		</div>
+		<div class="mb-3">
+			<label for="end_date" class="form-label">End Date (MM/YYYY)</label>
+			<input
+				type="month"
+				class="form-control"
+				id="end_date"
+				name="end_date"
+				value="{{ work_experience.end_date }}"
+			/>
+		</div>
+		<div class="mb-3">
+			<label for="description" class="form-label">Description</label>
+			<textarea class="form-control" id="description" name="description">
+{{ work_experience.description }}</textarea
+			>
+		</div>
+		<button type="submit" class="btn btn-primary">Save Changes</button>
+	</form>
+</div>
+
+{% endblock %}

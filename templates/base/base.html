@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{% block title %}My Portfolio{% endblock %}</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+		/>
+		<link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+		<!-- <style>
+			body {
+				display: flex;
+				height: 100vh;
+				overflow-x: hidden;
+				background-color: rgb(189, 224, 195);
+			}
+			#sidebar {
+				width: 250px;
+				height: 100vh;
+				background-color: #f8f9fa;
+				padding-top: 20px;
+			}
+			#content {
+				flex: 1;
+				padding: 20px;
+			}
+			.nav-link.active {
+				font-weight: bold;
+				background-color: #e9ecef;
+			}
+			.progress-bar-wrapper {
+				width: 100%;
+				background-color: grey;
+				border-radius: 5px;
+				height: 8px;
+				overflow: hidden;
+			}
+
+			.progress-bar {
+				width: 100%;
+				background-color: grey;
+				border-radius: 5px;
+				height: 8px;
+				position: relative;
+			}
+
+			.progress-fill {
+				background-color: blue;
+				height: 100%;
+				width: 0;
+				border-radius: 5px;
+				transition: width 0.3s ease;
+			}
+
+			.d-flex {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+			.about-section {
+				padding: 60px 0;
+			}
+			.about-section h2 {
+				font-weight: bold;
+				border-bottom: 3px solid #007bff;
+				display: inline-block;
+				padding-bottom: 10px;
+			}
+			.profile-info h3 {
+				font-weight: bold;
+			}
+			.profile-info p {
+				font-style: italic;
+				font-size: 1.2rem;
+			}
+			.details-list li {
+				list-style: none;
+				margin-bottom: 10px;
+			}
+			.details-list li i {
+				color: #007bff;
+				margin-right: 10px;
+			}
+			.form-section {
+				padding: 40px 0;
+			}
+			.form-section h2 {
+				font-weight: bold;
+				color: #007bff;
+			}
+			.form-container {
+				background-color: #f8f9fa;
+				padding: 30px;
+				border-radius: 8px;
+				box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+			}
+			.form-control:focus {
+				box-shadow: none;
+				border-color: #007bff;
+			}
+			.btn-custom {
+				background-color: #007bff;
+				border: none;
+			}
+			.btn-custom:hover {
+				background-color: #0056b3;
+			}
+		</style> -->
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row flex-grow-1">
+				<div class="col-md-3" id="sidebar">
+					<h2 class="text-center" style="color: rgb(240, 11, 137)">
+						PortfolioHub
+					</h2>
+					<ul class="nav flex-column ms-4 mt-4">
+						<li class="nav-item">
+							<a
+								class="nav-link {% if request.path == '/profile/' %}active{% endif %}"
+								href="{% url 'edit_profile' %}"
+								>Profile</a
+							>
+						</li>
+						<li class="nav-item">
+							<a
+								class="nav-link {% if request.path == '/users/' %}active{% endif %}"
+								href="{% url 'user_list' %}"
+								>Users</a
+							>
+						</li>
+						{% if user.is_authenticated %}
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'logout' %}">Logout</a>
+						</li>
+						{% else %}
+						<li class="nav-item">
+							<a
+								class="nav-link {% if request.path == '/register/' %}active{% endif %}"
+								href="{% url 'register' %}"
+								>Register</a
+							>
+						</li>
+						<li class="nav-item">
+							<a
+								class="nav-link {% if request.path == '/login/' %}active{% endif %}"
+								href="{% url 'user_login' %}"
+								>Login</a
+							>
+						</li>
+						{% endif %}
+					</ul>
+				</div>
+				<div class="col-md-9" id="content">
+					{% block content %}{% endblock %}
+				</div>
+			</div>
+
+			<!-- Footer -->
+			<footer class="text-center">
+				<div class="container">
+					<h5>&copy; 2024 PortfolioHub. All rights reserved.</h5>
+				</div>
+			</footer>
+		</div>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+			crossorigin="anonymous"
+		></script>
+		<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				var typed = new Typed('.typed', {
+					strings: [
+						'{{ profile.job_role_1 }}',
+						'{{ profile.job_role_2 }}',
+						'{{ profile.job_role_3 }}',
+					],
+					typeSpeed: 50, // Speed of typing
+					backSpeed: 50, // Speed of backspacing
+					loop: true, // Loop through the roles
+				})
+			})
+		</script>
+	</body>
+</html>

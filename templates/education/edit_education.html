@@ -1,0 +1,54 @@
+{% extends 'base/base.html' %}
+<!--  -->
+{% block title %}Edit Education{% endblock %}
+<!--  -->
+{% block content %}
+<div class="container mt-5">
+	<h2>Edit Education</h2>
+	<form method="POST">
+		{% csrf_token %}
+		<div class="mb-3">
+			<label for="institution" class="form-label">Institution</label>
+			<input
+				type="text"
+				class="form-control"
+				id="institution"
+				name="institution"
+				value="{{ education.institution }}"
+			/>
+		</div>
+		<div class="mb-3">
+			<label for="degree" class="form-label">Degree</label>
+			<input
+				type="text"
+				class="form-control"
+				id="degree"
+				name="degree"
+				value="{{ education.degree }}"
+			/>
+		</div>
+
+		<div class="mb-3">
+			<label for="start_date" class="form-label">Start Date</label>
+			<input
+				type="month"
+				class="form-control"
+				id="start_date"
+				name="start_date"
+				value="{{ education.start_date }}"
+			/>
+		</div>
+		<div class="mb-3">
+			<label for="end_date" class="form-label">End Date</label>
+			<input
+				type="month"
+				class="form-control"
+				id="end_date"
+				name="end_date"
+				value="{{ education.end_date }}"
+			/>
+		</div>
+		<button type="submit" class="btn btn-primary">Save</button>
+	</form>
+</div>
+{% endblock %}
